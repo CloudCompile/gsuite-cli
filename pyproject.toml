@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gsuite-cli"
+version = "0.1.0"
+description = "School Gmail, Drive, Docs and Calendar, sharing the classroom Chrome session"
+readme = "README.md"
+requires-python = ">=3.10"
+# The browser session, CDP driver and identity guard all come from classroom.
+dependencies = [
+    "typer>=0.9",
+    "rich>=13",
+    "websocket-client>=1.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+gmail = "gsuite.gmail_cli:main"
+gdrive = "gsuite.gdrive_cli:main"
+gdocs = "gsuite.gdocs_cli:main"
+gcal = "gsuite.gcal_cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gsuite"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
